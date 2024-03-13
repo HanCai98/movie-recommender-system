@@ -6,9 +6,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class RecommenderImplementation {
     //use filter interface to select filter
-    @Autowired
-    @Qualifier("CF")
     private Filter filter;
+
+    @Autowired
+    public RecommenderImplementation(@Qualifier("collaborativeFilter")Filter filter) {
+        this.filter = filter;
+        System.out.println("Constructor invoked...");
+    }
+
 
     //use a filter to find recommendations
     public String [] recommendMovies (String movie) {

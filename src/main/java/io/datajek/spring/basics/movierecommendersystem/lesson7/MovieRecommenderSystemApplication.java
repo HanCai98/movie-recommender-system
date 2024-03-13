@@ -9,17 +9,20 @@ import java.util.Arrays;
 public class MovieRecommenderSystemApplication {
     public static void main(String[] args) {
         //ApplicationContext manages the beans and dependencies
-        ApplicationContext appContext = SpringApplication.run(
-                MovieRecommenderSystemApplication.class, args);
+        ApplicationContext appContext = SpringApplication.run(MovieRecommenderSystemApplication.class, args);
 
-        //use ApplicationContext to find which filter is being used
-        RecommenderImplementation recommender = appContext.getBean(
-                RecommenderImplementation.class);
-
-        //call method to get recommendations
+        //RecommenderImplementation injects dependency using constructor
+        System.out.println("\n*************************************************");
+        System.out.println("Calling getBean() on RecommenderImplementation");
+        RecommenderImplementation recommender = appContext.getBean(RecommenderImplementation.class);
         String[] result = recommender.recommendMovies("Finding Dory");
+        System.out.println(Arrays.toString(result));
 
-        //display results
+        //RecommenderImplementation2 injects dependency using setter method
+        System.out.println("\n*************************************************");
+        System.out.println("Calling getBean() on RecommenderImplementation2");
+        RecommenderImplementation2 recommender2 = appContext.getBean(RecommenderImplementation2.class);
+        result = recommender2.recommendMovies("Finding Dory");
         System.out.println(Arrays.toString(result));
 
     }
